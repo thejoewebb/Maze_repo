@@ -28,10 +28,15 @@ public:
         std::vector<PositionPtr> generated;
 
         // TODO add free reachable positions from this point
+        int i,j;
 
+        for(i=x-1 ; i<=x+1 ; i+=2)
+            if(maze.isFree(i,y))
+                generated.push_back(std::make_unique<Position>(i,y));
 
-
-
+        for(j=y-1 ; j<=y+1 ; j+=2)
+            if(maze.isFree(x,j))
+                generated.push_back(std::make_unique<Position>(x,j));
 
         return generated;
     }

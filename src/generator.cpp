@@ -162,7 +162,7 @@ void mdraw(ecn::Maze maze)
     {
         for ( j = 0; j < width; j++ )
         {
-            if(maze.isFree(j,i))
+            if(!maze.isFree(j,i))
                 std::cout<<"#";
             else
                 std::cout<<" ";
@@ -181,7 +181,7 @@ void mgen(ecn::Maze &maze, double demolish_percent = 0 )
     int i, j;
     int free_space{0};
 
-    //"Outputs maze to terminal - nothing special"digs wherever there is no wall in the generated maze.
+    //"digs" wherever there is no wall in the generated maze.
     for ( i = 0; i < height; i++ )
     {
         for ( j = 0; j < width; j++ )
@@ -205,8 +205,8 @@ void mgen(ecn::Maze &maze, double demolish_percent = 0 )
     while(demolish<=walls*demolish_percent/100){
 
         //excludes walls in perimeter
-        i = 1 + (rand() % (height-2));
-        j = 1 + (rand() % (width-2));
+        i = (rand() % (height-2)) +1;
+        j = (rand() % (width-2)) +1;
 
         //only digs in walls
         if(!maze.isFree(j,i)){
