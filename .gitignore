@@ -1,6 +1,4 @@
 *.user
-/Debug
 /Release
 /subject
 /build
-/debug
