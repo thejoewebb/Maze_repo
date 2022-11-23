@@ -36,27 +36,35 @@ public:
         bool corridor{true};
         int i{0};
 
-        while(corridor==true){
+        while(true){
             if(axis == "x"){
 
-                if(!maze.isFree(_x+i*dir,_y) && i>0){
-                    vector.push_back(std::make_unique<Position>(_x+(i-1)*dir,_y, i));
-                    corridor = false;
+                auto x_new = _x+i*dir;
+
+                if(!maze.isFree(x_new,_y)){
+                    if(i>0)
+                        vector.push_back(std::make_unique<Position>(_x+(i-1)*dir,_y, i));
+                        //corridor = false;
+                 return;
 
                 }else if(maze.isFree(_x+i*dir,_y+1) || maze.isFree(_x+i*dir,_y-1)){//|| !maze.isFree(_x+i*dir,_y))
                     vector.push_back(std::make_unique<Position>(_x+i*dir,_y,i+1));
-                    corridor = false;
+                    //corridor = false;
+                    return;
                 }
 
             }else if(axis == "y"){
 
-                if(!maze.isFree(_x,_y+i*dir) && i>0){
-                    vector.push_back(std::make_unique<Position>(_x,_y+(i-1)*dir, i));
-                    corridor = false;
+                if(!maze.isFree(_x,_y+i*dir)){
+                    if(i>0)
+                        vector.push_back(std::make_unique<Position>(_x,_y+(i-1)*dir, i));
+                        //corridor = false;
+                    return;
 
                 }else if(maze.isFree(_x+1,_y+i*dir) || maze.isFree(_x-1,_y+i*dir)){// || !maze.isFree(_x,_y+i*dir))
                     vector.push_back(std::make_unique<Position>(_x,_y+i*dir, i+1));
-                    corridor = false;
+                    //corridor = false;
+                    return;
                 }
 
             }
@@ -74,11 +82,13 @@ public:
         // TODO add free reachable positions from this point
         int i,j;
 
-        for(i=x-1 ; i<=x+1 ; i+=2)
-            corridor(i,y,(i-x),"x", generated);
+        for(i=max(x-1,1) ; i<=min(x+1,maze.width()-2) ; i++)
+            if(i != x)
+                corridor(i,y,(i-x),"x", generated);
 
-        for(j=y-1 ; j<=y+1 ; j+=2)
-            corridor(x,j,(j-y),"y", generated);
+        for(j=max(y-1,1) ; j<=min(y+1,maze.height()-2) ; j++)
+            if(j != y)
+                corridor(x,j,(j-y),"y", generated);
 
         return generated;
     }

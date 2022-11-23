@@ -182,7 +182,7 @@ std::vector<Node> Astar(Node start, Node goal)
                                 child_g});
                     evaluated++;
                     tree.insert(child, best.node);
-                    if(show)
+                    if(!show)
                         child_ptr->show(false, *best.node);
                 }
                 else if(twin.g > child_g)
