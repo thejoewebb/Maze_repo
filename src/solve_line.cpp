@@ -32,8 +32,6 @@ public:
 
     void corridor(int _x, int _y, int dir, std::string axis, std::vector<PositionPtr> &vector)
     {
-
-        bool corridor{true};
         int i{0};
 
         while(true){
@@ -66,12 +64,9 @@ public:
                     //corridor = false;
                     return;
                 }
-
             }
-
             i++;
         }
-
     }
 
     std::vector<PositionPtr> children()
@@ -82,12 +77,12 @@ public:
         // TODO add free reachable positions from this point
         int i,j;
 
-        for(i=max(x-1,1) ; i<=min(x+1,maze.width()-2) ; i++)
-            if(i != x)
+        for(i=x-1 ; i<=x+1 ; i+=2)
+            if(i != 0 && i != maze.width()-2)
                 corridor(i,y,(i-x),"x", generated);
 
-        for(j=max(y-1,1) ; j<=min(y+1,maze.height()-2) ; j++)
-            if(j != y)
+        for(j=y-1 ; j<=y+1 ; j+=2)
+            if(j != 0 && j != maze.height()-2)
                 corridor(x,j,(j-y),"y", generated);
 
         return generated;
