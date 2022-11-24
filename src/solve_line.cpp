@@ -78,11 +78,11 @@ public:
         int i,j;
 
         for(i=x-1 ; i<=x+1 ; i+=2)
-            if(i != 0 && i != maze.width()-2)
+            if(i != 0 && i != maze.width()-1)
                 corridor(i,y,(i-x),"x", generated);
 
         for(j=y-1 ; j<=y+1 ; j+=2)
-            if(j != 0 && j != maze.height()-2)
+            if(j != 0 && j != maze.height()-1)
                 corridor(x,j,(j-y),"y", generated);
 
         return generated;

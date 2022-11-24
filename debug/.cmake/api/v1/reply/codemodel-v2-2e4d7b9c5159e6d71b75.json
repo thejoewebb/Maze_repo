@@ -1,0 +1,96 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"jsonFile" : "directory-.-Debug-f5ebdc15457944623624.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "2.6"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3,
+						4
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "maze",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3,
+						4
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "cell::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-cell-Debug-aa90630401d766e16b49.json",
+					"name" : "cell",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "corridor::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-corridor-Debug-2056100353d8c6829952.json",
+					"name" : "corridor",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "generator::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-generator-Debug-c1432baa66cb4b771cf6.json",
+					"name" : "generator",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "line::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-line-Debug-d6b55b474e7415bcb3a6.json",
+					"name" : "line",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "maze::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-maze-Debug-530fb7d4699af1abe50a.json",
+					"name" : "maze",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "/home/joe/Documents/ECN/ARPRO_git/Maze_repo/debug",
+		"source" : "/home/joe/Documents/ECN/ARPRO_git/Maze_repo"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 3
+	}
+}

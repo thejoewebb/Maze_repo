@@ -174,7 +174,7 @@ void mdraw(ecn::Maze maze)
 void mgen(ecn::Maze &maze, double demolish_percent = 0 )
 {
     if(demolish_percent>=100){
-        std::cout<<"invalid demolish percentage. please enter a value less than 100%";
+        std::cout<<"invalid demolish percentage. please enter a value less than 100%"<<std::endl;
         return;
     }
 
