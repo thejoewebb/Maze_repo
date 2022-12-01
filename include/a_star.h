@@ -134,7 +134,7 @@ std::vector<Node> Astar(Node start, Node goal)
     // keep track of who comes from who
     Tree<Node> tree;
 
-    if(!show)
+    if(show)
         start.start();
 
     int evaluated = 0, created = 0, shortcut = 0;
@@ -156,7 +156,7 @@ std::vector<Node> Astar(Node start, Node goal)
 
         tree.close(best.node);
         queue.pop();
-        if(!show)
+        if(show)
         {
             Node* parent = tree[best.node];
             if(parent)
@@ -182,7 +182,7 @@ std::vector<Node> Astar(Node start, Node goal)
                                 child_g});
                     evaluated++;
                     tree.insert(child, best.node);
-                    if(!show)
+                    if(show)
                         child_ptr->show(false, *best.node);
                 }
                 else if(twin.g > child_g)
