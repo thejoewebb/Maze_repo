@@ -30,66 +30,56 @@ public:
         return distance;
     }
 
-    void corridor(int _x, int _y, int dir, std::string axis, std::vector<PositionPtr> &vector)
+    std::vector<Position> scan(int _x,int _y)
     {
-        int i{0};
+        std::vector<pair<int,int>> check = {{-1,0},{1,0},{0,-1},{0,1}};
+        std::vector<Position> directions;
 
-        while(true){
-            if(axis == "x"){
+        //check all adjacent cells for wall. if the cell is free, add it to the list of adjacent free cells
+        for(auto [i,j]: check)
+            if(maze.isFree(_x+i,_y+j))
+                directions.push_back(Position(_x+i,_y+j));
 
-                auto x_new = _x+i*dir;
+        //return list of free directions. If the length of the vector !=2 the scan cell is either a dead end or junction
+        return directions;
 
-                if(!maze.isFree(x_new,_y)){
-                    if(i>0)
-                        vector.push_back(std::make_unique<Position>(_x+(i-1)*dir,_y, i));
-                        //corridor = false;
-                 return;
-
-                }else if(maze.isFree(_x+i*dir,_y+1) || maze.isFree(_x+i*dir,_y-1)){//|| !maze.isFree(_x+i*dir,_y))
-                    vector.push_back(std::make_unique<Position>(_x+i*dir,_y,i+1));
-                    //corridor = false;
-                    return;
-                }
-
-            }else if(axis == "y"){
-
-                if(!maze.isFree(_x,_y+i*dir)){
-                    if(i>0)
-                        vector.push_back(std::make_unique<Position>(_x,_y+(i-1)*dir, i));
-                        //corridor = false;
-                    return;
-
-                }else if(maze.isFree(_x+1,_y+i*dir) || maze.isFree(_x-1,_y+i*dir)){// || !maze.isFree(_x,_y+i*dir))
-                    vector.push_back(std::make_unique<Position>(_x,_y+i*dir, i+1));
-                    //corridor = false;
-                    return;
-                }
-            }
-            i++;
-        }
     }
 
-    std::vector<PositionPtr> children()
-    {
-        // this method should return  all positions reachable from this one
+    std::vector<PositionPtr> children(){
+        //initialise vector of children
         std::vector<PositionPtr> generated;
 
-        // TODO add free reachable positions from this point
-        int i,j;
+        //check all free adjacent cells
+        for(auto cell: scan(x,y))
 
-        for(i=x-1 ; i<=x+1 ; i+=2)
-            if(i != 0 && i != maze.width()-1)
-                corridor(i,y,(i-x),"x", generated);
+            //progress in y direction
+            if(cell.x == x){
 
-        for(j=y-1 ; j<=y+1 ; j+=2)
-            if(j != 0 && j != maze.height()-1)
-                corridor(x,j,(j-y),"y", generated);
+                //set iteration direction
+                auto dir = cell.y - y;
+                auto y_new = cell.y;
+                //iterate until wall ahead or free cell to side
+                while(maze.isFree(x,y_new+dir) && !maze.isFree(x-1,y_new) && !maze.isFree(x+1,y_new))
+                    y_new += dir;
 
+                //add child to vector
+                generated.push_back(std::make_unique<Position>(x,y_new, abs(y_new-y)));
+
+            }else{
+
+                //set iteration direction
+                auto dir = cell.x - x;
+                auto x_new = cell.x;
+                //iterate until wall ahead or free cell to side
+                while(maze.isFree(x_new + dir,y) && !maze.isFree(x_new,y-1) && !maze.isFree(x_new,y+1))
+                    x_new += dir;
+
+                //add child vector
+                generated.push_back(std::make_unique<Position>(x_new,y, abs(x_new-x)));
+            }
         return generated;
     }
 };
-
-
 
 int main( int argc, char **argv )
 {

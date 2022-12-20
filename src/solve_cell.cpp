@@ -27,22 +27,23 @@ public:
         // this method should return  all positions reachable from this one
         std::vector<PositionPtr> generated;
 
-        // TODO add free reachable positions from this point
         int i,j;
 
+        //check left and right adjacent cells
         for(i=x-1 ; i<=x+1 ; i+=2)
             if(maze.isFree(i,y))
+                //add to children if no wall
                 generated.push_back(std::make_unique<Position>(i,y));
 
+        //check upper and lower adjacent cells
         for(j=y-1 ; j<=y+1 ; j+=2)
             if(maze.isFree(x,j))
+                //add to children if no wall
                 generated.push_back(std::make_unique<Position>(x,j));
 
         return generated;
     }
 };
-
-
 
 int main( int argc, char **argv )
 {
